@@ -51,7 +51,7 @@ def crawl_urls(conferences: list[ConferenceTarget])->None:
             results[name] = []
             print(f"failed conference={name} url={url} error={exc}", file=sys.stderr)
 
-def crawl_detail() -> int:
+def crawl_titles() -> int:
     if not TARGET_CONFERENCES:
         print("TARGET_CONFERENCES is empty", file=sys.stderr)
         return 1

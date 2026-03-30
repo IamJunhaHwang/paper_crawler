@@ -67,7 +67,7 @@ def update_database(df: pd.DataFrame, table_name: str, engine: Engine):
             }) 
     print("데이터베이스 업데이트가 완료되었습니다.")
 
-def crawl_titles():
+def crawl_detail():
     df, engine = read_table(table_name="EMNLP_2025")
     conference_url = "https://aclanthology.org/2025.emnlp-main.0/"
     detail_crawler = DetailCrawlerFactory.create(conference_url)
