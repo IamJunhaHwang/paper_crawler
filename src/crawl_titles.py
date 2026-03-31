@@ -60,4 +60,4 @@ def crawl_titles() -> int:
     return 0
 
 if __name__ == "__main__":
-    raise SystemExit(crawl_detail())
+    raise SystemExit(crawl_titles())

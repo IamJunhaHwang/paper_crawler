@@ -1,10 +1,10 @@
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Text, Boolean
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Text, Boolean, Engine, text
 from config import PROJECT_ROOT
 
 engine = create_engine(f'sqlite:///{PROJECT_ROOT}/papers_data.db')
 metadata = MetaData()
 
-def init_db(table_name): 
+def init_db(table_name: str) -> Table: 
     # 함수 내부에서 Table 객체를 생성하여 이름을 부여합니다.
     new_table = Table(
         table_name, metadata,

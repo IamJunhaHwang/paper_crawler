@@ -5,7 +5,8 @@ from typing import Tuple
 from config import PROJECT_ROOT
 from paper_crawler.factories.detail_factory import DetailCrawlerFactory
 from paper_crawler.detail import BasePaperDetailCrawler
-from sqlalchemy import create_engine, Engine, text
+from db_manager.database import engine, Engine, text
+
 import pandas as pd
 
 # dblp -> aclanthology
@@ -25,10 +26,9 @@ def for_test(table_name: str, engine: Engine):
         conn.execute(query)
 
 def read_table(table_name: str) -> Tuple[pd.DataFrame, Engine]:
-    engine = create_engine(f'sqlite:///{PROJECT_ROOT}/papers_data.db')
     df = pd.read_sql(table_name, con=engine)
 
-    return (df, engine)
+    return df
 
 def process(df: pd.DataFrame, detail_crawler: BasePaperDetailCrawler) -> pd.DataFrame:
     mask = df['selected'] == 1
@@ -68,12 +68,12 @@ def update_database(df: pd.DataFrame, table_name: str, engine: Engine):
     print("데이터베이스 업데이트가 완료되었습니다.")
 
 def crawl_detail():
-    df, engine = read_table(table_name="EMNLP_2025")
+    df = read_table(table_name="EMNLP_2025")
     conference_url = "https://aclanthology.org/2025.emnlp-main.0/"
     detail_crawler = DetailCrawlerFactory.create(conference_url)
-    for_test("EMNLP_2025", engine)
+    # for_test("EMNLP_2025", engine)
     process(df, detail_crawler)
     update_database(df, "EMNLP_2025", engine)
 
 if __name__ == "__main__":
-    raise SystemExit(crawl_titles())
+    raise SystemExit(crawl_detail())
