@@ -25,7 +25,7 @@ def for_test(table_name: str, engine: Engine):
         """)
         conn.execute(query)
 
-def read_table(table_name: str) -> Tuple[pd.DataFrame, Engine]:
+def read_table(table_name: str) -> pd.DataFrame:
     df = pd.read_sql(table_name, con=engine)
 
     return df

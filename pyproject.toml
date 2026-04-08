@@ -11,6 +11,9 @@ dependencies = [
     "pandas",
     "requests",
     "beautifulsoup4",
+    "transformers",
+    "tqdm",
+    "torch"
 ]
 
 # src 폴더 아래에 있는 패키지들을 찾으라고 알려줍니다.
